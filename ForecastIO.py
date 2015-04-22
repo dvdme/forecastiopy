@@ -43,9 +43,9 @@ class ForecastIO():
     LANG_RUSSIAN = 'ru'
 
     
-    forecast = ''
+ #   forecast = ''
 
-    currently = ''
+ #   currently = ''
     minutely = ''
     hourly = ''
     daily = ''
@@ -61,7 +61,12 @@ class ForecastIO():
         else:
             print 'The API Key doesn\'t seam to be valid.'
     
-    
+    def get_forecast(self, latitude, longitude):
+        reply = self.http_get( self.url_builder(latitude, longitude) )
+        self.forecast = json.loads(reply)
+        if 'currently' in self.forecast:
+            self.currently = self.forecast['currently']
+        #print json.dumps(self.currently, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
     
     def url_builder(self, latitude, longitude):
         try:
@@ -81,8 +86,7 @@ class ForecastIO():
             url += 'extend=hourly'
         return url
 
-    def http_get(self, request_url):
-        
+    def http_get(self, request_url):      
         try:
             headers = {'Accept-Encoding' : 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
@@ -112,6 +116,5 @@ class ForecastIO():
 
 
 if __name__ == '__main__':
-    fio = ForecastIO('12345678901234567890123456789012')
-    print fio.url_builder('124',124.98)
-    print fio.http_get('http://www.google.com')
+    fio = ForecastIO('a66c3d9fd49043109081f945a9d4abba')
+    fio.get_forecast(37.8267,-122.423)
