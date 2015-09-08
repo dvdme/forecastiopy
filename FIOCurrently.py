@@ -1,30 +1,10 @@
-package com.github.dvdme.ForecastIOLib;
+class FIOCurrently():
 
-public class FIOCurrently {
+    currently = None
 
-	FIODataPoint currently;
+    def __init__(self, forecast_io):
+		if forecast_io.has_currently():
+			self.currently = forecast_io.get_currently()
 
-	public FIOCurrently(ForecastIO fio){
-
-		this.currently = null;
-		init(fio);
-
-	}
-
-	private void init(ForecastIO fio){
-
-		if(fio.hasCurrently()){
-			this.currently = new FIODataPoint(fio.getCurrently()); 
-			this.currently.setTimezone(fio.getTimezone());
-		}
-	}
-
-	/**
-	 * Returns the data point from the currently report
-	 * @return A FIODataPoint containing the currently report
-	 */
-	public FIODataPoint get(){
-		return this.currently;
-	}
-
-}
+    def get(self):
+		return self.currently

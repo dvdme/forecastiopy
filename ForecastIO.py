@@ -4,7 +4,7 @@ import sys
 import json
 import requests
 
-class ForecastIO():    
+class ForecastIO():
 
 
     ForecastIOURL = 'https://api.forecast.io/forecast/'
@@ -19,7 +19,7 @@ class ForecastIO():
     Expires = ''
     X_Forecast_API_Calls = ''
     X_Response_Time = ''
-    
+
     raw_response = ''
 
 
@@ -42,7 +42,7 @@ class ForecastIO():
     LANG_PIG_LATIN = 'x-pig-latin'
     LANG_RUSSIAN = 'ru'
 
-    
+
  #   forecast = ''
 
  #   currently = ''
@@ -57,23 +57,29 @@ class ForecastIO():
             self.ForecastIOApiKey = api_key
             self.extend = False
             self.units_url = self.UNITS_AUTO
-            self.lang_url = self.LANG_ENGLISH 
+            self.lang_url = self.LANG_ENGLISH
         else:
             print 'The API Key doesn\'t seam to be valid.'
-    
+
     def get_forecast(self, latitude, longitude):
         reply = self.http_get( self.url_builder(latitude, longitude) )
         self.forecast = json.loads(reply)
         if 'currently' in self.forecast:
             self.currently = self.forecast['currently']
-        #print json.dumps(self.currently, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
-    
+        if 'minutely' in self.forecast:
+            self.minutely = self.forecast['minutely']
+        if 'hourly' in self.forecast:
+            self.hourly = self.forecast['hourly']
+        if 'daily' in self.forecast:
+            self.daily = self.forecast['daily']
+        #return json.dumps(self.daily, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
+
     def url_builder(self, latitude, longitude):
         try:
             float(latitude)
             float(longitude)
         except ValueError:
-            raise ValueError('Latitude and Longitude must be a number')
+            raise ValueError('Latitude and Longitude must be a (float) number')
         url = self.ForecastIOURL + self.ForecastIOApiKey+"/"
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():
@@ -86,7 +92,7 @@ class ForecastIO():
             url += 'extend=hourly'
         return url
 
-    def http_get(self, request_url):      
+    def http_get(self, request_url):
         try:
             headers = {'Accept-Encoding' : 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
@@ -97,24 +103,48 @@ class ForecastIO():
         except requests.exceptions.RequestException as e:
             print e
             sys.exit(1)
-        
+
         try:
-            self.Cache_Control = response.headers['Cache_Control']
+            self.Cache_Control = response.headers['Cache-Control']
             self.Expires = response.headers['Expires']
-            self.X_Forecast_API_Calls = response.headers['X_Forecast_API_Calls']
-            self._Response_Time = response.headers['X_Response_Time']
+            self.X_Forecast_API_Calls = response.headers['X-Forecast-API-Calls']
+            self._Response_Time = response.headers['X-Response-Time']
         except Exception as e:
             print 'Warning: Could not get headers. %s' % e
-            
+
         if response.status_code is not 200:
             raise requests.exceptions.HTTPError('Bad response')
             sys.exit(1)
-        
+
         self.raw_response = response.content
         return response.content
 
+    def has_currently(self):
+        return 'currently' in self.forecast
 
+    def get_currently(self):
+        return self.currently
+
+    def has_daily(self):
+        return 'daily' in self.forecast
+
+    def get_daily(self):
+        return self.daily
+
+    def has_hourly(self):
+        return 'hourly' in self.forecast
+
+    def get_hourly(self):
+        return self.hourly
+
+    def has_minutely(self):
+        return 'minutely' in self.forecast
+
+    def get_minutely(self):
+        return self.minutely
 
 if __name__ == '__main__':
     fio = ForecastIO('a66c3d9fd49043109081f945a9d4abba')
     fio.get_forecast(37.8267,-122.423)
+    print json.dumps(fio.currently, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
+    print fio.has_currently()

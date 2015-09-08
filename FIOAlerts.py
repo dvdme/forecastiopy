@@ -7,29 +7,29 @@ import java.util.TimeZone;
 import com.eclipsesource.json.JsonValue;
 
 public class FIOAlerts {
-	
+
 	private Alert [] alert;
 	private String timezone;
 	private int numberofalerts;
 
 	public FIOAlerts(ForecastIO fio) {
-		
+
 		if(fio.hasAlerts()){
 			alert = new Alert[fio.getAlerts().size()];
 			timezone = fio.getTimezone();
 			numberofalerts = fio.getAlerts().size();
 			init(fio);
 		}
-		
-		
+
+
 	}
 	
 	private void init(ForecastIO fio){
 
 		JsonValue jsonvalue;
-		
+
 		if(fio.hasAlerts()){
-			
+
 			for(int i=0; i < NumberOfAlerts(); i++ ){
 				alert[i] = new Alert();
 				jsonvalue = fio.getAlerts().get(i);
@@ -39,11 +39,11 @@ public class FIOAlerts {
 				alert[i].setDescription( jsonvalue.asObject().get("description").asString() );
 				alert[i].setUri( jsonvalue.asObject().get("uri").asString() );
 			}
-		
+
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns the number os alerts in the reply.
 	 * For more information refer to the API Docs:
@@ -53,7 +53,7 @@ public class FIOAlerts {
 	public int NumberOfAlerts() {
 		return numberofalerts;
 	}
-	
+
 	/**
 	 * Returns the title for the alert. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -67,7 +67,7 @@ public class FIOAlerts {
 		else
 			return alert[index].getTitle();
 	}
-	
+
 	/**
 	 * Returns the time for the alert. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -86,7 +86,7 @@ public class FIOAlerts {
 			return out;
 		}
 	}
-	
+
 	/**
 	 * Returns the expiration time for the alert. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -105,7 +105,7 @@ public class FIOAlerts {
 			return out;
 		}
 	}
-	
+
 	/**
 	 * Returns the description for the alert. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -119,7 +119,7 @@ public class FIOAlerts {
 		else
 			return alert[index].getDescription();
 	}
-	
+
 	/**
 	 * Returns the uri for the alert. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -133,7 +133,7 @@ public class FIOAlerts {
 		else
 			return alert[index].getUri();
 	}
-	
+
 	/**
 	 * Returns a string with all the alert information. Returns null if index doesn't exist.
 	 * For more information refer to the API Docs:
@@ -142,9 +142,9 @@ public class FIOAlerts {
 	 * @return string with all the alert information. Null if index doesn't exist.
 	 */
 	public String getAlert(int index){
-		
+
 		StringBuilder sb = new StringBuilder("");
-		
+
 		sb.append("Title: " + getAlertTitle(index));
 		sb.append("\n");
 		sb.append("Time: " + getAlertTime(index));
@@ -155,21 +155,21 @@ public class FIOAlerts {
 		sb.append("\n");
 		sb.append("URI: " + getAlertURI(index));
 		sb.append("\n");
-		
+
 		return sb.toString();
-		
+
 	}
 
 }//public class - end
 
 class Alert {
-	
+
 	private String title;
 	private Long time;
 	private Long expire;
 	private String description;
 	private String uri;
-	
+
 	public Alert(){
 		setTitle("");
 		setTime(0L);
@@ -217,5 +217,5 @@ class Alert {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-	
+
 }//class Alert - end

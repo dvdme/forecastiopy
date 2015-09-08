@@ -1,42 +1,25 @@
-package com.github.dvdme.ForecastIOLib;
+class FIOMinutely():
 
-public class FIOMinutely {
+    minutely = None
 
-	FIODataBlock minutely;
+    def __init__(self, forecast_io):
+        if forecast_io.has_minutely():
+            self.minutely = forecast_io.get_minutely()
 
-	public FIOMinutely(ForecastIO fio){
+    def get(self, minute=None):
+		if minute is None:
+			return self.minutely
+		else:
+			return self.get_minute(minute)
 
-		init(fio);
 
-	}
 
-	private void init(ForecastIO fio){
+    def get_minute(self, minute):
+        if minute > self.minutes():
+            return 'no data'
+        else:
+            return self.get()['data'][minute]
 
-		if(fio.hasMinutely()){
-			this.minutely = new FIODataBlock(fio.getMinutely());
-			this.minutely.setTimezone(fio.getTimezone());
-		}
-		else {
-			this.minutely = null;
-		}
-	}
 
-	/**
-	 * Returns the data point for the given minute in the minutely report
-	 * @param minute the minute to get
-	 * @return return the data point with the report
-	 */
-	public FIODataPoint getMinute(int minute){
-
-		return this.minutely == null ? null : this.minutely.datapoint(minute);  
-	}
-
-	/**
-	 * Returns the minutes in the minutely report
-	 * @return integer with the number of minute. Returns -1 if there is not data in the report.
-	 */
-	public int minutes(){
-		return this.minutely == null ? -1 : this.minutely.datablockSize();
-	}
-
-}
+    def minutes(self):
+        return len(self.get()['data'])

@@ -1,42 +1,24 @@
-package com.github.dvdme.ForecastIOLib;
+class FIOHourly():
 
-public class FIOHourly {
+    hourly = None
 
-	FIODataBlock hourly;
+    def __init__(self, forecast_io):
+        if forecast_io.has_hourly():
+            self.hourly = forecast_io.get_hourly()
 
-	public FIOHourly(ForecastIO fio){
+    def get(self, hour=None):
+		if hour is None:
+			return self.hourly
+		else:
+			return self.get_hour(hour)
 
-		init(fio);
 
-	}
+    def get_hour(self, hour):
+        if hour > self.hours():
+            return 'no data'
+        else:
+            return self.get()['data'][hour]
 
-	private void init(ForecastIO fio){
 
-		if(fio.hasHourly()){
-			this.hourly = new FIODataBlock(fio.getHourly());
-			this.hourly.setTimezone(fio.getTimezone());
-		}
-		else {
-			this.hourly = null;
-		}
-	}
-
-	/**
-	 * Returns the data point for the given day in the hourly report
-	 * @param hour the hour to get
-	 * @return return the data point with the report
-	 */
-	public FIODataPoint getHour(int hour){
-
-		return this.hourly == null ? null : this.hourly.datapoint(hour);  
-	}
-
-	/**
-	 * Returns the hours in the hourly report
-	 * @return integer with the number of hours. Returns -1 if there is not data in the report.
-	 */
-	public int hours(){
-		return this.hourly == null ? -1 : this.hourly.datablockSize();
-	}
-
-}
+    def hours(self):
+        return len(self.get()['data'])

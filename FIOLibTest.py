@@ -1,23 +1,36 @@
-package com.github.dvdme.ForecastIOLib;
+#
+# Test ForecastIOLibPy
+#
+
+import json
+import ForecastIO
+import FIOCurrently, FIODaily, FIOHourly, FIOMinutely
+
+apikey = 'a66c3d9fd49043109081f945a9d4abba'
+
+#Some coordinates for testing
+Lisbon = [38.7252993 , -9.1500364]
+Madrid = [40.41678 , -3.70379]
+Ceuta = [35.88838 , -5.32464]
+Paris = [48.85661 , 2.35222]
+Berlin = [52.51917 , 13.40609]
+Brasilia = [-15.83454 , -47.98828]
+London = [51.51121 , -0.11982]
+Alcatraz = [37.8267 , -122.423]
+Caracas = [10.4880555, -66.8791667]
 
 
-public class FIOLibTest {
+fio = ForecastIO.ForecastIO(apikey)
 
-	private static final String apikey = "YOUR_API_KEY";
+forecast = fio.get_forecast(Alcatraz[0], Alcatraz[1])
+min = FIOMinutely.FIOMinutely(fio)
 
-	public static void main(String[] args) {
+print min.get()
+for item in min.get_minute(1).keys():
+	print item + ' : ' + str(min.get_minute(1)[item])
+#print json.dumps(day.get(), sort_keys=True, indent=4, separators=(',', ': '))
 
-		//Some coordinates for testing
-		//Lisbon:   38.7252993 , -9.1500364
-		//Madrid:   40.41678 , -3.70379
-		//Ceuta:    35.88838 , -5.32464
-		//Paris:    48.85661 , 2.35222 
-		//Berlin:   52.51917 , 13.40609
-		//Brasilia: -15.83454 , -47.98828
-		//London:   51.51121 , -0.11982
-		//Alcatraz: 37.8267 , -122.423
-		//Caracas:  10.4880555, -66.8791667
-
+"""
 		ForecastIO fio = new ForecastIO(apikey);
 		fio.setUnits(ForecastIO.UNITS_SI);
 		fio.setLang(ForecastIO.LANG_ENGLISH);
@@ -36,7 +49,7 @@ public class FIOLibTest {
 		System.out.println("Longitude: "+fio.getLongitude());
 		System.out.println("Timezone: "+fio.getTimezone());
 		System.out.println("Offset: "+fio.offsetValue());
-		System.out.println("\n");	
+		System.out.println("\n");
 
 		//Currently data
 		FIOCurrently currently = new FIOCurrently(fio);
@@ -120,3 +133,4 @@ public class FIOLibTest {
 	}//main
 
 }
+"""

@@ -1,43 +1,25 @@
-package com.github.dvdme.ForecastIOLib;
+class FIODaily():
 
-public class FIODaily {
+    daily = None
 
-	FIODataBlock daily;
+    def __init__(self, forecast_io):
+        if forecast_io.has_daily():
+            self.daily = forecast_io.get_daily()
 
-	public FIODaily(ForecastIO fio){
+    def get(self, day=None):
+		if day is None:
+			return self.daily
+		else:
+			return self.get_day(day)
 
-		this.daily = null;
-		init(fio);
 
-	}
 
-	private void init(ForecastIO fio){
+    def get_day(self, day):
+        if day > self.days():
+            return 'no data'
+        else:
+            return self.get()['data'][day]
 
-		if(fio.hasDaily()){
-			this.daily = new FIODataBlock(fio.getDaily());
-			this.daily.setTimezone(fio.getTimezone());
-		}
-		else {
-			this.daily = null;
-		}
-	}
 
-	/**
-	 * Returns the data point for the given day in the daily report
-	 * @param day the day to get
-	 * @return return the data point with the report
-	 */
-	public FIODataPoint getDay(int day){
-
-		return this.daily == null ? null : this.daily.datapoint(day);  
-	}
-
-	/**
-	 * Returns the days in the daily report
-	 * @return integer with the number of days. Returns -1 if there is not data in the report.
-	 */
-	public int days(){
-		return this.daily == null ? -1 : this.daily.datablockSize();
-	}
-
-}
+    def days(self):
+        return len(self.get()['data'])
