@@ -4,31 +4,28 @@ import sys
 import json
 import requests
 
+
 class ForecastIO():
 
-
     ForecastIOURL = 'https://api.forecast.io/forecast/'
-    ForecastIOApiKey = '';
-    units_url = ''
-    time_url = ''
-    exclude_url = ''
-    lang_url = ''
-    extend = ''
 
-    Cache_Control = ''
-    Expires = ''
-    X_Forecast_API_Calls = ''
-    X_Response_Time = ''
-
-    raw_response = ''
-
+    ForecastIOApiKey = None
+    units_url = None
+    time_url = None
+    exclude_url = None
+    lang_url = None
+    extend = None
+    Cache_Control = None
+    Expires = None
+    X_Forecast_API_Calls = None
+    X_Response_Time = None
+    raw_response = None
 
     UNITS_US = 'us'
     UNITS_SI = 'si'
     UNITS_CA = 'ca'
     UNITS_UK = 'uk'
     UNITS_AUTO = 'auto'
-
     LANG_BOSNIAN = 'bs'
     LANG_GERMAN = 'de'
     LANG_ENGLISH = 'en'
@@ -42,27 +39,23 @@ class ForecastIO():
     LANG_PIG_LATIN = 'x-pig-latin'
     LANG_RUSSIAN = 'ru'
 
-
- #   forecast = ''
-
- #   currently = ''
-    minutely = ''
-    hourly = ''
-    daily = ''
-    flags = ''
-    alerts = ''
-
-    def __init__(self, api_key):
+    def __init__(self, api_key, extend=False,
+                    units_url=UNITS_AUTO, lang_url=LANG_ENGLISH,
+                    latitude=None, longitude=None):
         if api_key.__len__() == 32:
             self.ForecastIOApiKey = api_key
-            self.extend = False
-            self.units_url = self.UNITS_AUTO
-            self.lang_url = self.LANG_ENGLISH
+            self.extend = extend
+            self.units_url = units_url
+            self.lang_url = lang_url
+            self.latitude = latitude
+            self.longitude = longitude
+            if latitude is not None and longitude is not None:
+                self.get_forecast(latitude, longitude)
         else:
-            print 'The API Key doesn\'t seam to be valid.'
+            print('The API Key doesn\'t seam to be valid.')
 
     def get_forecast(self, latitude, longitude):
-        reply = self.http_get( self.url_builder(latitude, longitude) )
+        reply = self.http_get(self.url_builder(latitude, longitude))
         self.forecast = json.loads(reply)
         if 'currently' in self.forecast:
             self.currently = self.forecast['currently']
@@ -72,7 +65,10 @@ class ForecastIO():
             self.hourly = self.forecast['hourly']
         if 'daily' in self.forecast:
             self.daily = self.forecast['daily']
-        #return json.dumps(self.daily, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
+        if 'flags' in self.forecast:
+            self.flags = self.forecast['flags']
+        if 'alerts' in self.forecast:
+            self.alerts = self.forecast['alerts']
 
     def url_builder(self, latitude, longitude):
         try:
@@ -80,7 +76,7 @@ class ForecastIO():
             float(longitude)
         except ValueError:
             raise ValueError('Latitude and Longitude must be a (float) number')
-        url = self.ForecastIOURL + self.ForecastIOApiKey+"/"
+        url = self.ForecastIOURL + self.ForecastIOApiKey + '/'
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():
             url += ',' + self.time_url.strip()
@@ -94,23 +90,23 @@ class ForecastIO():
 
     def http_get(self, request_url):
         try:
-            headers = {'Accept-Encoding' : 'gzip, deflate'}
+            headers = {'Accept-Encoding': 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
         except requests.exceptions.Timeout:
-            print 'Error: Timeout'
+            print('Error: Timeout')
         except requests.exceptions.TooManyRedirects:
-            print 'Error: TooManyRedirects'
+            print ('Error: TooManyRedirects')
         except requests.exceptions.RequestException as e:
-            print e
+            print (e)
             sys.exit(1)
 
         try:
             self.Cache_Control = response.headers['Cache-Control']
             self.Expires = response.headers['Expires']
             self.X_Forecast_API_Calls = response.headers['X-Forecast-API-Calls']
-            self._Response_Time = response.headers['X-Response-Time']
+            self.X_Response_Time = response.headers['X-Response-Time']
         except Exception as e:
-            print 'Warning: Could not get headers. %s' % e
+            print(('Warning: Could not get headers. %s' % e))
 
         if response.status_code is not 200:
             raise requests.exceptions.HTTPError('Bad response')
@@ -143,8 +139,14 @@ class ForecastIO():
     def get_minutely(self):
         return self.minutely
 
-if __name__ == '__main__':
-    fio = ForecastIO('a66c3d9fd49043109081f945a9d4abba')
-    fio.get_forecast(37.8267,-122.423)
-    print json.dumps(fio.currently, sort_keys=True, indent=4, separators=(',', ': ')) #Test Output
-    print fio.has_currently()
+    def has_flags(self):
+        return 'flags' in self.forecast
+
+    def get_flags(self):
+        return self.flags
+
+    def has_alerts(self):
+        return 'alerts' in self.forecast
+
+    def get_alerts(self):
+        return self.alerts
