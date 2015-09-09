@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIOMinutely():
+class FIOMinutely(object):
 
     minutely = None
 

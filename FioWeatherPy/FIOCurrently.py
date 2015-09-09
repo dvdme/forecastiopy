@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIOCurrently():
+class FIOCurrently(object):
 
     currently = None
 

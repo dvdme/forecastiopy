@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIOFlags():
+class FIOFlags(object):
 
     flags = None
 

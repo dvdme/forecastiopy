@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIOAlerts():
+class FIOAlerts(object):
 
     alerts = None
 

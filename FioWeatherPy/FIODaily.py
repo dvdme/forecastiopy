@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIODaily():
+class FIODaily(object):
 
     daily = None
 

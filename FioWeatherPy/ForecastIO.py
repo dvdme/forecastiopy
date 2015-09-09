@@ -5,7 +5,7 @@ import json
 import requests
 
 
-class ForecastIO():
+class ForecastIO(object):
 
     ForecastIOURL = 'https://api.forecast.io/forecast/'
 

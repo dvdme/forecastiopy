@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class FIOHourly():
+class FIOHourly(object):
 
     hourly = None
 
