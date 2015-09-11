@@ -12,6 +12,7 @@ except:
 apikey = 'a66c3d9fd49043109081f945a9d4abba'
 
 #Some coordinates for testing
+Barreiro = [38.666667, -9.10000]
 Lisbon = [38.7252993, -9.1500364]
 Madrid = [40.41678, -3.70379]
 Ceuta = [35.88838, -5.32464]
