@@ -52,5 +52,3 @@ class FIOAlerts(object):
             return None
         else:
             return len(self.get())
-        
-
