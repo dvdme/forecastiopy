@@ -3,6 +3,7 @@
 This module recieves an ForecastIO object and holds the currently weather
 conditions. It has one class for this purpose.
 """
+import types
 
 
 class FIOCurrently(object):
@@ -20,7 +21,9 @@ class FIOCurrently(object):
         """
         if forecast_io.has_currently():
             self.currently = forecast_io.get_currently()
-
+            for item in self.currently.keys():
+                setattr(self, item, self.currently[item])
+      
     def get(self):
         """
         Returns a dictionary with current weather conditions.
