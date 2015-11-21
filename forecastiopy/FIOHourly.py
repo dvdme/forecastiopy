@@ -20,6 +20,9 @@ class FIOHourly(object):
         """
         if forecast_io.has_hourly():
             self.hourly = forecast_io.get_hourly()
+            for x in xrange(0, self.hours()):
+                for item in self.get_hour(x).keys():
+                    setattr(self, 'hour_'+str(x+1)+'_'+item, self.get_hour(x)[item])
 
     def get(self, hour=None):
         """
