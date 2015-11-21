@@ -16,8 +16,12 @@ class FIOCurrently(object):
 
     def __init__(self, forecast_io):
         """
+        Construct a new 'FIOCurrently' object.
         Recieves an ForecastIO object and gets the currently weather conditions
         if they are available in the object.
+        
+        Args:
+            forecast_io (ForecastIO): The ForecastIO object
         """
         if forecast_io.has_currently():
             self.currently = forecast_io.get_currently()
@@ -28,5 +32,9 @@ class FIOCurrently(object):
         """
         Returns a dictionary with current weather conditions.
         Returns None is none are available.
+        
+        Returns:
+            Dictionary with current weather conditions.
+            None is none are available.
         """
         return self.currently
