@@ -19,12 +19,15 @@ class FIODaily(object):
         """
         if forecast_io.has_daily():
             self.daily = forecast_io.get_daily()
+            for x in xrange(0, self.days()):
+                for item in self.get_day(x).keys():
+                    setattr(self, 'day_'+str(x+1)+'_'+item, self.get_day(x)[item])
 
     def get(self, day=None):
         """
         Returns a dictionary with daily weather conditions.
         Returns None is none are available.
-        A day can be passed as an argument, is so function will call get_day()
+        A day can be passed as an argument, if so function will call get_day()
         to return that day.
         Look on function get_day()
         """
