@@ -142,8 +142,8 @@ class ForecastIO(object):
         if response.status_code is not 200:
             raise requests.exceptions.HTTPError('Bad response')
 
-        self.raw_response = response.content
-        return response.content
+        self.raw_response = response.text
+        return self.raw_response
 
     def has_currently(self):
         """
