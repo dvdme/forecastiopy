@@ -19,6 +19,8 @@ class FIODaily(object):
         """
         if forecast_io.has_daily():
             self.daily = forecast_io.get_daily()
+            for item in forecast_io.get_daily().keys():
+                setattr(self, item, forecast_io.get_daily()[item])
             for x in xrange(0, self.days()):
                 for item in self.get_day(x).keys():
                     setattr(self, 'day_'+str(x+1)+'_'+item, self.get_day(x)[item])
@@ -45,26 +47,6 @@ class FIODaily(object):
             return None
         else:
             return self.get()['data'][day-1]
-            
-    def get_day_icon(self, day):
-        """
-        Recieves a day as an argument and returns the icon for that day if
-        is available. If not, function will return None.
-        """
-        if day > self.days():
-            return None
-        else:
-            return self.get(day)['icon']
-            
-    def get_day_summary(self, day):
-        """
-        Recieves a day as an argument and returns the summary for that day if
-        is available. If not, function will return None.
-        """
-        if day > self.days():
-            return None
-        else:
-            return self.get(day)['summary']
 
     def days(self):
         """
