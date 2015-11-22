@@ -45,6 +45,26 @@ class FIODaily(object):
             return None
         else:
             return self.get()['data'][day-1]
+            
+    def get_day_icon(self, day):
+        """
+        Recieves a day as an argument and returns the icon for that day if
+        is available. If not, function will return None.
+        """
+        if day > self.days():
+            return None
+        else:
+            return self.get(day)['icon']
+            
+    def get_day_summary(self, day):
+        """
+        Recieves a day as an argument and returns the summary for that day if
+        is available. If not, function will return None.
+        """
+        if day > self.days():
+            return None
+        else:
+            return self.get(day)['summary']
 
     def days(self):
         """
