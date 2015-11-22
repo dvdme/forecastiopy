@@ -20,6 +20,8 @@ class FIOHourly(object):
         """
         if forecast_io.has_hourly():
             self.hourly = forecast_io.get_hourly()
+            for item in forecast_io.get_hourly().keys():
+                setattr(self, item, forecast_io.get_hourly()[item])
             for x in xrange(0, self.hours()):
                 for item in self.get_hour(x).keys():
                     setattr(self, 'hour_'+str(x+1)+'_'+item, self.get_hour(x)[item])
@@ -46,26 +48,6 @@ class FIOHourly(object):
             return None
         else:
             return self.get()['data'][hour-1]
-            
-    def get_hour_icon(self, hour):
-        """
-        Recieves a hour as an argument and returns the icon for that hour if
-        is available. If not, function will return None.
-        """
-        if hour > self.hours():
-            return None
-        else:
-            return self.get(hour)['icon']
-            
-    def get_hour_summary(self, hour):
-        """
-        Recieves a hour as an argument and returns the summary for that hour if
-        is available. If not, function will return None.
-        """
-        if hour > self.hours():
-            return None
-        else:
-            return self.get(hour)['summary']
 
     def hours(self):
         """
