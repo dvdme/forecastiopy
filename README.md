@@ -11,18 +11,6 @@ A jar file with the dependencies is available under the jar/ folder for convenie
 This is for and was developed with Python 2.7<br>
 I don't think this will work with Python 3<br>
 
-<!--
-#### Maven dependency:
-```xml
-<dependency>
-	<groupId>com.github.dvdme</groupId>
-	<artifactId>ForecastIOLib</artifactId>
-	<version>LATEST</version>
-</dependency>
-```
-* Versions 1.5.1 ,1.5.2 and 1.5.3 are on maven. I recommend using the latest.
--->
-
 ####What is does:
 * It can read Data Points and Data blocks from the [Forecast.io](http://www.forecast.io) API.
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
@@ -186,13 +174,6 @@ Why I did this?
 For fun.
 I like weather and weather data. 
 And I like Python.
-
-
-<!--
-Contributors
-------------
-* Thanks to everyone that [contribuited](https://github.com/dvdme/forecastio-lib-java/graphs/contributors) to make this software better.
--->
 
 License
 -------
