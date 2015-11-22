@@ -24,6 +24,7 @@ class ForecastIO(object):
     forecast_io_api_key = None
     units_url = None
     time_url = None
+    extend_url = None
     exclude_url = None
     lang_url = None
     extend = None
@@ -32,6 +33,9 @@ class ForecastIO(object):
     x_forecast_api_calls = None
     x_responde_time = None
     raw_response = None
+    
+    allowed_excludes_extends = ('currently', 'minutely', 'hourly', \
+    'daily', 'alerts', 'flags')
 
     UNITS_US = 'us'
     UNITS_SI = 'si'
@@ -51,8 +55,8 @@ class ForecastIO(object):
     LANG_PIG_LATIN = 'x-pig-latin'
     LANG_RUSSIAN = 'ru'
 
-    def __init__(self, api_key, extend=False, units_url=UNITS_AUTO, \
-    lang_url=LANG_ENGLISH, latitude=None, longitude=None):
+    def __init__(self, apikey, extend=None, exclude=None, units=UNITS_AUTO, \
+    lang=LANG_ENGLISH, latitude=None, longitude=None):
         """
         A valid api key must be provided in the object instantiation.
         Other options are available.
@@ -61,11 +65,12 @@ class ForecastIO(object):
         reply.
         """
 
-        if api_key.__len__() == 32:
-            self.forecast_io_api_key = api_key
-            self.extend = extend
-            self.units_url = units_url
-            self.lang_url = lang_url
+        if apikey.__len__() == 32:
+            self.forecast_io_api_key = apikey
+            self.extend_url = extend
+            self.exclude_url = exclude
+            self.units_url = units
+            self.lang_url = lang
             self.latitude = latitude
             self.longitude = longitude
             if latitude is not None and longitude is not None:
@@ -89,8 +94,8 @@ class ForecastIO(object):
 
     def url_builder(self, latitude, longitude):
         """
-        This function is used to build the correct url to make the requestto the
-        forecast.io api.
+        This function is used to build the correct url to make the request
+        to the forecast.io api.
         Recieves the latitude and the longitude.
         Return a string with the url.
         """
@@ -98,18 +103,31 @@ class ForecastIO(object):
             float(latitude)
             float(longitude)
         except ValueError:
-            raise ValueError('Latitude and Longitude must be a (float) number')
+            raise ValueError('Latitude and Longitude must be a float number')
         url = self.forecast_io_url + self.forecast_io_api_key + '/'
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():
             url += ',' + self.time_url.strip()
         url += '?units=' + self.units_url.strip()
         url += '&lang=' + self.lang_url.strip()
-        if self.exclude_url and not self.exclude_url.isspace():
-            url += '&exclude=' + self.exclude_url.strip()
-        if self.extend is True:
-            url += 'extend=hourly'
+        if self.exclude_url is not None:
+            excludes = ''
+            for item in self.exclude_url:
+                if item in self.allowed_excludes_extends:
+                    excludes += item + ','
+            if excludes.__len__() > 0:
+                url += '&exclude=' + excludes.rstrip(',')
+        if self.extend_url is not None:
+            extends = ''
+            for item in self.extend_url:
+                if item in self.allowed_excludes_extends:
+                    extends += item + ','
+            if extends.__len__() > 0:
+                url += '&extend=' + extends.rstrip(',')
         return url
+        
+    def get_url(self):
+        return self.url_builder(self.latitude, self.longitude)
 
     def http_get(self, request_url):
         """
