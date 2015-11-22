@@ -70,6 +70,8 @@ class ForecastIO(object):
             self.longitude = longitude
             if latitude is not None and longitude is not None:
                 self.get_forecast(latitude, longitude)
+            else:
+                print 'Latitude or longitude not set'
         else:
             print 'The API Key doesn\'t seam to be valid.'
 
@@ -81,18 +83,9 @@ class ForecastIO(object):
         """
         reply = self.http_get(self.url_builder(latitude, longitude))
         self.forecast = json.loads(reply)
-        if 'currently' in self.forecast:
-            self.currently = self.forecast['currently']
-        if 'minutely' in self.forecast:
-            self.minutely = self.forecast['minutely']
-        if 'hourly' in self.forecast:
-            self.hourly = self.forecast['hourly']
-        if 'daily' in self.forecast:
-            self.daily = self.forecast['daily']
-        if 'flags' in self.forecast:
-            self.flags = self.forecast['flags']
-        if 'alerts' in self.forecast:
-            self.alerts = self.forecast['alerts']
+
+        for item in self.forecast.keys():
+            setattr(self, item, self.forecast[item])
 
     def url_builder(self, latitude, longitude):
         """
