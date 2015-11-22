@@ -46,6 +46,26 @@ class FIOHourly(object):
             return None
         else:
             return self.get()['data'][hour-1]
+            
+    def get_hour_icon(self, hour):
+        """
+        Recieves a hour as an argument and returns the icon for that hour if
+        is available. If not, function will return None.
+        """
+        if hour > self.hours():
+            return None
+        else:
+            return self.get(hour)['icon']
+            
+    def get_hour_summary(self, hour):
+        """
+        Recieves a hour as an argument and returns the summary for that hour if
+        is available. If not, function will return None.
+        """
+        if hour > self.hours():
+            return None
+        else:
+            return self.get(hour)['summary']
 
     def hours(self):
         """
