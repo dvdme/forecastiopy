@@ -6,7 +6,6 @@ but as the languages are so different, this one took its own way.
 Anyway it is largely inspired by my previous Java wrapper.
 The API is fully implemented except for something I missed.
 Further development and improvements will continue.
-A jar file with the dependencies is available under the jar/ folder for convenience.
 
 This is for and was developed with Python 2.7<br>
 I don't think this will work with Python 3<br>
@@ -158,6 +157,26 @@ else:
 ```
 
 **Get Alerts weather data for the requested location**
+
+**A note on time**
+The API returns time in unix time. Although this is a good computer format,
+it is particulary _human-readable_
+So, to get a more _human-sane_ format, you can do soething like this:
+```python
+import datetime
+
+time = datetime.datetime.fromtimestamp(int(currently.time).strftime('%Y-%m-%d %H:%M:%S')
+print 'unix time:', currently.time
+print 'time:', time
+
+```
+
+Output should be like:
+```
+unix time: 1448234556
+time: 2015-11-22 23:22:36
+```
+
 It should work just like Flags and the other ones, but at the time I am writting this I could not find a location with alerts to test on.
 
 Issues
