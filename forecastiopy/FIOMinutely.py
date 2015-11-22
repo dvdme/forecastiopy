@@ -7,7 +7,7 @@ conditions. It has one class for this purpose.
 class FIOMinutely(object):
     """
     This class recieves an ForecastIO object and holds the minutely weather
-    conditions.
+    conditions. It has one class for this purpose.
     """
 
     minutely = None
@@ -19,6 +19,8 @@ class FIOMinutely(object):
         """
         if forecast_io.has_minutely():
             self.minutely = forecast_io.get_minutely()
+            for item in forecast_io.get_minutely().keys():
+                setattr(self, item, forecast_io.get_minutely()[item])
             for x in xrange(0, self.minutes()):
                 for item in self.get_minute(x).keys():
                     setattr(self, 'minute_'+str(x+1)+'_'+item, self.get_minute(x)[item])
