@@ -19,6 +19,12 @@ class ForecastIO(object):
     The resulting object is used by the other classes to get the information.
     """
 
+    # pylint: disable=too-many-instance-attributes
+    # Many attributes needed to hold all the data
+ 
+    # pylint: disable=too-many-arguments
+    # Many arguments needed to build the url
+
     forecast_io_url = 'https://api.forecast.io/forecast/'
 
     forecast_io_api_key = None
@@ -33,7 +39,14 @@ class ForecastIO(object):
     x_forecast_api_calls = None
     x_responde_time = None
     raw_response = None
-    
+
+    currently = None
+    minutely = None
+    hourly = None
+    daily = None
+    flags = None
+    alerts = None
+
     allowed_excludes_extends = ('currently', 'minutely', 'hourly', \
     'daily', 'alerts', 'flags')
 
@@ -125,8 +138,14 @@ class ForecastIO(object):
             if extends.__len__() > 0:
                 url += '&extend=' + extends.rstrip(',')
         return url
-        
+ 
     def get_url(self):
+        """
+        Return the url built from the url_builder() function.
+
+        Returns:
+            The built url string
+        """
         return self.url_builder(self.latitude, self.longitude)
 
     def http_get(self, request_url):
