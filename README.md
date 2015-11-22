@@ -10,6 +10,28 @@ Further development and improvements will continue.
 This is for and was developed with Python 2.7<br>
 I don't think this will work with Python 3<br>
 
+####Quick Start:
+Install the package:
+```
+pip install forecastiopy
+```
+
+Get the coordinates of your location, let's say Lisbon:
+```
+>>> Lisbon = [38.7252993, -9.1500364]
+```
+
+Get the current temperature and precipitation probability:
+```
+>>> from forecastiopy import *
+>>> fio = ForecastIO.ForecastIO('a66c3d9fd49043109081f945a9d4abba', latitude=Lisbon[0], longitude=Lisbon[1])
+>>> current = FIOCurrently.FIOCurrently(fio)
+>>> print 'Temperature:', current.temperature
+Temperature: 11.07
+>>> print 'Precipitation Probability:', current.precipProbability
+Precipitation Probability: 0.29
+```
+
 ####What is does:
 * It can read Data Points and Data blocks from the [Forecast.io](http://www.forecast.io) API.
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
