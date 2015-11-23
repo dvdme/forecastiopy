@@ -1,7 +1,7 @@
 ForcastIO Python
 ===================
 A Python wrapper for the [Forecast.io](http://www.forecast.io) API.
-This started as port of my other wrapper [ForecastIO-Lib_Java](https://github.com/dvdme/forecastio-lib-java)
+This started as port of my other wrapper [ForecastIO-Lib-Java](https://github.com/dvdme/forecastio-lib-java)
 but as the languages are so different, this one took its own way. 
 Anyway it is largely inspired by my previous Java wrapper.
 The API is fully implemented except for something I missed.
@@ -24,7 +24,7 @@ Get the coordinates of your location, let's say Lisbon:
 Get the current temperature and precipitation probability:
 ```
 >>> from forecastiopy import *
->>> fio = ForecastIO.ForecastIO('a66c3d9fd49043109081f945a9d4abba', latitude=Lisbon[0], longitude=Lisbon[1])
+>>> fio = ForecastIO.ForecastIO(YOUR_APY_KEY, latitude=Lisbon[0], longitude=Lisbon[1])
 >>> current = FIOCurrently.FIOCurrently(fio)
 >>> print 'Temperature:', current.temperature
 Temperature: 11.07
@@ -46,6 +46,7 @@ Precipitation Probability: 0.29
 ####To Do:
 * I'm not sure at this point in time but I'm sure something will appear.
 * I need to improve the docstrings
+* Python 3 compatibility
 
 ####How it works:
 The `forecastiopy` package has 9 classes.
