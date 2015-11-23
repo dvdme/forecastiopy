@@ -44,7 +44,7 @@ Precipitation Probability: 0.29
 * It does not implements the `callback` request option.
 
 ####To Do:
-* I'm not sure at this point in time but I'm something will appear.
+* I'm not sure at this point in time but I'm sure something will appear.
 * I need to improve the docstrings
 
 ####How it works:
@@ -179,6 +179,7 @@ else:
 ```
 
 **Get Alerts weather data for the requested location**
+It should work just like Flags and the other ones, but at the time I am writting this I could not find a location with alerts to test on.
 
 **A note on time**
 The API returns time in unix time. Although this is a good computer format,
@@ -198,8 +199,6 @@ Output should be like:
 unix time: 1448234556
 time: 2015-11-22 23:22:36
 ```
-
-It should work just like Flags and the other ones, but at the time I am writting this I could not find a location with alerts to test on.
 
 Issues
 ------
