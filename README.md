@@ -184,7 +184,7 @@ It should work just like Flags and the other ones, but at the time I am writting
 
 **A note on time**
 The API returns time in unix time. Although this is a good computer format,
-it is particulary _human-readable_
+it is not particulary _human-readable_
 So, to get a more _human-sane_ format, you can do soething like this:
 ```python
 import datetime
