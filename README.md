@@ -1,4 +1,4 @@
-ForcastIO Python
+ForcastIO Python 3
 ===================
 A Python wrapper for the [Forecast.io](http://www.forecast.io) API.
 This is a Python 3 fork of David Ervideira's forecastiopy
