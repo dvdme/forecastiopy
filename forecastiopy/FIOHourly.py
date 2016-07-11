@@ -22,7 +22,7 @@ class FIOHourly(object):
             self.hourly = forecast_io.get_hourly()
             for item in forecast_io.get_hourly().keys():
                 setattr(self, item, forecast_io.get_hourly()[item])
-            for hour in xrange(0, self.hours()):
+            for hour in range(0, self.hours()):
                 for item in self.get_hour(hour).keys():
                     setattr(self, 'hour_'+str(hour+1)+'_'+item, \
                     self.get_hour(hour)[item])

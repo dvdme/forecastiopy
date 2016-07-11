@@ -21,7 +21,7 @@ class ForecastIO(object):
 
     # pylint: disable=too-many-instance-attributes
     # Many attributes needed to hold all the data
- 
+
     # pylint: disable=too-many-arguments
     # Many arguments needed to build the url
 
@@ -89,9 +89,9 @@ class ForecastIO(object):
             if latitude is not None and longitude is not None:
                 self.get_forecast(latitude, longitude)
             else:
-                print 'Latitude or longitude not set'
+                print('Latitude or longitude not set')
         else:
-            print 'The API Key doesn\'t seam to be valid.'
+            print('The API Key doesn\'t seam to be valid.')
 
     def get_forecast(self, latitude, longitude):
         """
@@ -138,7 +138,7 @@ class ForecastIO(object):
             if extends.__len__() > 0:
                 url += '&extend=' + extends.rstrip(',')
         return url
- 
+
     def get_url(self):
         """
         Return the url built from the url_builder() function.
@@ -161,11 +161,11 @@ class ForecastIO(object):
             headers = {'Accept-Encoding': 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
         except requests.exceptions.Timeout:
-            print 'Error: Timeout'
+            print('Error: Timeout')
         except requests.exceptions.TooManyRedirects:
-            print 'Error: TooManyRedirects'
+            print('Error: TooManyRedirects')
         except requests.exceptions.RequestException as ex:
-            print ex
+            print(ex)
             sys.exit(1)
 
         try:
@@ -174,7 +174,7 @@ class ForecastIO(object):
             self.x_forecast_api_calls = response.headers['X-Forecast-API-Calls']
             self.x_responde_time = response.headers['X-Response-Time']
         except KeyError as kerr:
-            print 'Warning: Could not get headers. %s' % kerr
+            print('Warning: Could not get headers. %s') % kerr
 
         if response.status_code is not 200:
             raise requests.exceptions.HTTPError('Bad response')
