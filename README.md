@@ -1,7 +1,7 @@
 ForcastIO Python 3
 ===================
 A Python wrapper for the [Forecast.io](http://www.forecast.io) API.
-This is a Python 3 fork of David Ervideira's forecastiopy. If you
+This is a fork of David Ervideira's forecastiopy, ported for Python 3. If you
 are not using Python 3, make sure to use [his version](https://github.com/dvdme/forecastiopy).
 
 ####Quick Start:
