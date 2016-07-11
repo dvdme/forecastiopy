@@ -39,7 +39,6 @@ Precipitation Probability: 0.29
 ####To Do:
 * I'm not sure at this point in time but I'm sure something will appear.
 * I need to improve the docstrings
-* Python 3 compatibility
 
 ####How it works:
 The `forecastiopy` package has 9 classes.
