@@ -1,19 +1,12 @@
 ForcastIO Python
 ===================
 A Python wrapper for the [Forecast.io](http://www.forecast.io) API.
-This started as port of my other wrapper [ForecastIO-Lib-Java](https://github.com/dvdme/forecastio-lib-java)
-but as the languages are so different, this one took its own way. 
-Anyway it is largely inspired by my previous Java wrapper.
-The API is fully implemented except for something I missed.
-Further development and improvements will continue.
-
-This is for and was developed with Python 2.7<br>
-I don't think this will work with Python 3<br>
+This is a Python 3 fork of David Ervideira's forecastiopy
 
 ####Quick Start:
 Install the package:
 ```
-pip install forecastiopy
+python setup.py install
 ```
 
 Get the coordinates of your location, let's say Lisbon:
@@ -37,8 +30,8 @@ Precipitation Probability: 0.29
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
 * It reads all available fields.
 * It reads all the available flags.
-* It reads all the available alerts. 
-* It reads all the available errors. 
+* It reads all the available alerts.
+* It reads all the available errors.
 
 ####What it does not:
 * It does not implements the `callback` request option.
@@ -51,15 +44,15 @@ Precipitation Probability: 0.29
 ####How it works:
 The `forecastiopy` package has 9 classes.
 The main class is `ForecastIO`: It handles the connection, build the url and the gets the initial data from the API.
-The classes `FIOCurrently`, `FIOMinutely`, `FIOHourly`, `FIODaily`, `FIOFlags` and `FIOAlerts` 
+The classes `FIOCurrently`, `FIOMinutely`, `FIOHourly`, `FIODaily`, `FIOFlags` and `FIOAlerts`
 contain the currently, minutely, hourly, daily, flags and alerts reports.
 Data can be accessed by the returned dictionary or directly by attributes made with reflection magic.
 See "Usage Examples" below.
 
-Please refer to the API docs [https://developer.forecast.io](https://developer.forecast.io) 
+Please refer to the API docs [https://developer.forecast.io](https://developer.forecast.io)
 for better understanding of the data and for the API key. - You'll need a key to get it to work.
 
-####Dependencies: 
+####Dependencies:
 * [requests](https://pypi.python.org/pypi/requests/)
 
 
@@ -78,7 +71,7 @@ fio = ForecastIO.ForecastIO(apikey,
                             units=ForecastIO.ForecastIO.UNITS_SI,
                             lang=ForecastIO.ForecastIO.LANG_ENGLISH,
                             latitude=Lisbon[0], longitude=Lisbon[1])
-                            
+
 print 'Latitude', fio.latitude, 'Longitude', fio.longitude
 print 'Timezone', fio.timezone, 'Offset', fio.offset
 print fio.get_url() # You might want to see the request url
@@ -114,7 +107,7 @@ if fio.has_minutely() is True:
 		for item in minutely.get_minute(minute).keys():
 			print item + ' : ' + unicode(minutely.get_minute(minute)[item])
 		print
-		# Or access attributes directly for a given minute. 
+		# Or access attributes directly for a given minute.
 		# minutely.minute_3_time would also work
 		print minutely.minute_1_time
 		print
@@ -136,7 +129,7 @@ if fio.has_hourly() is True:
 		for item in hourly.get_hour(hour).keys():
 			print item + ' : ' + unicode(hourly.get_hour(hour)[item])
 		print
-		# Or access attributes directly for a given minute. 
+		# Or access attributes directly for a given minute.
 		# hourly.hour_5_time would also work
 		print hourly.hour_3_time
 		print
@@ -158,7 +151,7 @@ if fio.has_daily() is True:
 		for item in daily.get_day(day).keys():
 			print item + ' : ' + unicode(daily.get_day(day)[item])
 		print
-		# Or access attributes directly for a given minute. 
+		# Or access attributes directly for a given minute.
 		# daily.day_7_time would also work
 		print daily.day_5_time
 		print
@@ -213,7 +206,7 @@ Thanks to pylint complaning, I did wrote docstring for everything!
 Why I did this?
 -------
 For fun.
-I like weather and weather data. 
+I like weather and weather data.
 And I like Python.
 
 License
