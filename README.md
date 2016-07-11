@@ -196,17 +196,13 @@ time: 2015-11-22 23:22:36
 Issues
 ------
 To report issues please do it in [Github](https://github.com/dvdme/forecastiopy) or
-send me an <a href="mailto:david.dme@gmail.com">email</a>.<br>
+send me an <a href="mailto:angel3nyc@gmail.com">email</a>.<br>
 
 Documentation
 -------------
-Thanks to pylint complaning, I did wrote docstring for everything!
+Thanks to pylint complaning, David wrote a docstring for everything. Thanks,
+David! 
 
-Why I did this?
--------
-For fun.
-I like weather and weather data.
-And I like Python.
 
 License
 -------
