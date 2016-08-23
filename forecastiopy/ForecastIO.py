@@ -105,6 +105,17 @@ class ForecastIO(object):
         for item in self.forecast.keys():
             setattr(self, item, self.forecast[item])
 
+    def get_forecast_from_string(self, forecast_string):
+        """
+        Gets the weather data and stores it in the respective dictionaries if
+        available.
+        This function should be used to fetch weather information.
+        """
+        self.forecast = json.loads(forecast_string)
+
+        for item in self.forecast.keys():
+            setattr(self, item, self.forecast[item])
+
     def url_builder(self, latitude, longitude):
         """
         This function is used to build the correct url to make the request
