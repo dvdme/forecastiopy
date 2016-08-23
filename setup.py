@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 setup(name='forecastiopy',
-      version='0.1',
+      version='0.2',
       description='A wrapper to access weather data provided by forecast.io',
       url='http://github.com/dvdme/forecastiopy',
       author='David Ervideira',
