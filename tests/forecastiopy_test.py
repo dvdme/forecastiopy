@@ -24,6 +24,12 @@ class ForecastIOTest(unittest.TestCase):
     def test_offset(self):
         self.assertEqual(self.fio.offset, 1)
 
+    def test_has_currently(self):
+        self.assertEqual(self.fio.has_currently(), True)
+
+    def test_currently(self):
+        self.assertIsNotNone(self.fio.currently)
+
 
 if __name__ == '__main__':
     unittest.main()
