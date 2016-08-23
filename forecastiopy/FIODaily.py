@@ -23,7 +23,7 @@ class FIODaily(object):
                 setattr(self, item, forecast_io.get_daily()[item])
             for day in xrange(0, self.days()):
                 for item in self.get_day(day).keys():
-                    setattr(self, 'day_'+str(day+1)+'_'+item, \
+                    setattr(self, 'day_'+str(day)+'_'+item, \
                     self.get_day(day)[item])
 
     def get(self, day=None):
@@ -47,7 +47,7 @@ class FIODaily(object):
         if day > self.days():
             return None
         else:
-            return self.get()['data'][day-1]
+            return self.get()['data'][day]
 
     def days(self):
         """
