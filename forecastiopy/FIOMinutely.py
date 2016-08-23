@@ -21,9 +21,9 @@ class FIOMinutely(object):
             self.minutely = forecast_io.get_minutely()
             for item in forecast_io.get_minutely().keys():
                 setattr(self, item, forecast_io.get_minutely()[item])
-            for minute in xrange(0, self.minutes()):
+            for minute in xrange(1, self.minutes()+1):
                 for item in self.get_minute(minute).keys():
-                    setattr(self, 'minute_'+str(minute+1)+'_'+item, \
+                    setattr(self, 'minute_'+str(minute)+'_'+item, \
                     self.get_minute(minute)[item])
 
     def get(self, minute=None):
