@@ -10,6 +10,7 @@ class FIODaily(object):
     conditions. It has one class for this purpose.
     """
 
+    daily = None
 
     def __init__(self, forecast_io):
         """
@@ -20,9 +21,9 @@ class FIODaily(object):
             self.daily = forecast_io.get_daily()
             for item in forecast_io.get_daily().keys():
                 setattr(self, item, forecast_io.get_daily()[item])
-            for day in xrange(1, self.days()+1):
+            for day in xrange(0, self.days()):
                 for item in self.get_day(day).keys():
-                    setattr(self, 'day_'+str(day)+'_'+item, \
+                    setattr(self, 'day_'+str(day+1)+'_'+item, \
                     self.get_day(day)[item])
 
     def get(self, day=None):
