@@ -9,6 +9,7 @@ The resulting object is used by the other classes to get the information.
 import sys
 import json
 import requests
+from __future__ import print_function
 
 
 class ForecastIO(object):
@@ -25,29 +26,9 @@ class ForecastIO(object):
     # pylint: disable=too-many-arguments
     # Many arguments needed to build the url
 
-    forecast_io_url = 'https://api.forecast.io/forecast/'
+    _forecast_io_url = 'https://api.forecast.io/forecast/'
 
-    forecast_io_api_key = None
-    units_url = None
-    time_url = None
-    extend_url = None
-    exclude_url = None
-    lang_url = None
-    extend = None
-    cache_control = None
-    expires = None
-    x_forecast_api_calls = None
-    x_responde_time = None
-    raw_response = None
-
-    currently = None
-    minutely = None
-    hourly = None
-    daily = None
-    flags = None
-    alerts = None
-
-    allowed_excludes_extends = ('currently', 'minutely', 'hourly', \
+    _allowed_excludes_extends = ('currently', 'minutely', 'hourly', \
     'daily', 'alerts', 'flags')
 
     UNITS_US = 'us'
@@ -78,7 +59,7 @@ class ForecastIO(object):
         reply.
         """
 
-        if apikey.__len__() == 32:
+        if len(apikey) == 32:
             self.forecast_io_api_key = apikey
             self.extend_url = extend
             self.exclude_url = exclude
@@ -89,9 +70,9 @@ class ForecastIO(object):
             if latitude is not None and longitude is not None:
                 self.get_forecast(latitude, longitude)
             else:
-                print 'Latitude or longitude not set'
+                print('Latitude or longitude not set')
         else:
-            print 'The API Key doesn\'t seam to be valid.'
+            print('The API Key doesn\'t seam to be valid.')
 
     def get_forecast(self, latitude, longitude):
         """
@@ -117,7 +98,7 @@ class ForecastIO(object):
             float(longitude)
         except ValueError:
             raise ValueError('Latitude and Longitude must be a float number')
-        url = self.forecast_io_url + self.forecast_io_api_key + '/'
+        url = self._forecast_io_url + self.forecast_io_api_key + '/'
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():
             url += ',' + self.time_url.strip()
@@ -126,16 +107,16 @@ class ForecastIO(object):
         if self.exclude_url is not None:
             excludes = ''
             for item in self.exclude_url:
-                if item in self.allowed_excludes_extends:
+                if item in self._allowed_excludes_extends:
                     excludes += item + ','
-            if excludes.__len__() > 0:
+            if len(excludes) > 0:
                 url += '&exclude=' + excludes.rstrip(',')
         if self.extend_url is not None:
             extends = ''
             for item in self.extend_url:
-                if item in self.allowed_excludes_extends:
+                if item in self._allowed_excludes_extends:
                     extends += item + ','
-            if extends.__len__() > 0:
+            if len(extends) > 0:
                 url += '&extend=' + extends.rstrip(',')
         return url
  
@@ -160,24 +141,37 @@ class ForecastIO(object):
         try:
             headers = {'Accept-Encoding': 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
-        except requests.exceptions.Timeout:
-            print 'Error: Timeout'
-        except requests.exceptions.TooManyRedirects:
-            print 'Error: TooManyRedirects'
+        except requests.exceptions.Timeout as ext:
+            print('Error: Timeout', ext)
+        except requests.exceptions.TooManyRedirects as extmr:
+            print('Error: TooManyRedirects', extmr)
         except requests.exceptions.RequestException as ex:
-            print ex
+            print('Error: RequestException', ex)
             sys.exit(1)
 
         try:
             self.cache_control = response.headers['Cache-Control']
+        except KeyError as kerr:
+            print('Warning: Could not get headers. %s' % kerr)
+            self.cache_control = None
+        try:
             self.expires = response.headers['Expires']
+        except KeyError as kerr:
+            print('Warning: Could not get headers. %s' % kerr)
+            self.extend_url = None
+        try:
             self.x_forecast_api_calls = response.headers['X-Forecast-API-Calls']
+        except KeyError as kerr:
+            print('Warning: Could not get headers. %s' % kerr)
+            self.x_forecast_api_calls = None
+        try:
             self.x_responde_time = response.headers['X-Response-Time']
         except KeyError as kerr:
-            print 'Warning: Could not get headers. %s' % kerr
+            print('Warning: Could not get headers. %s' % kerr)
+            self.x_responde_time = None
 
         if response.status_code is not 200:
-            raise requests.exceptions.HTTPError('Bad response')
+            raise requests.exceptions.HTTPError('Bad response, status code: %x' % (response.status_code))
 
         self.raw_response = response.text
         return self.raw_response
