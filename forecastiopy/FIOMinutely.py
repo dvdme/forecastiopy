@@ -23,7 +23,7 @@ class FIOMinutely(object):
                 setattr(self, item, forecast_io.get_minutely()[item])
             for minute in xrange(0, self.minutes()):
                 for item in self.get_minute(minute).keys():
-                    setattr(self, 'minute_'+str(minute+1)+'_'+item, \
+                    setattr(self, 'minute_'+str(minute)+'_'+item, \
                     self.get_minute(minute)[item])
 
     def get(self, minute=None):
@@ -47,7 +47,7 @@ class FIOMinutely(object):
         if minute > self.minutes():
             return None
         else:
-            return self.get()['data'][minute-1]
+            return self.get()['data'][minute]
 
     def minutes(self):
         """
