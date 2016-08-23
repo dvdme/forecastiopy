@@ -6,10 +6,11 @@ It then gets the weather data based on those configurations.
 The resulting object is used by the other classes to get the information.
 """
 
+from __future__ import print_function
 import sys
 import json
 import requests
-from __future__ import print_function
+
 
 
 class ForecastIO(object):
@@ -50,7 +51,7 @@ class ForecastIO(object):
     LANG_RUSSIAN = 'ru'
 
     def __init__(self, apikey, extend=None, exclude=None, units=UNITS_AUTO, \
-    lang=LANG_ENGLISH, latitude=None, longitude=None):
+    lang=LANG_ENGLISH, time=None, latitude=None, longitude=None):
         """
         A valid api key must be provided in the object instantiation.
         Other options are available.
@@ -65,6 +66,7 @@ class ForecastIO(object):
             self.exclude_url = exclude
             self.units_url = units
             self.lang_url = lang
+            self.time_url = time
             self.latitude = latitude
             self.longitude = longitude
             if latitude is not None and longitude is not None:
