@@ -74,7 +74,7 @@ class ForecastIO(object):
             else:
                 print('Latitude or longitude not set')
         else:
-            print('The API Key doesn\'t seam to be valid.')
+            raise ValueError('The API Key doesn\'t seam to be valid.')
 
     def get_forecast(self, latitude, longitude):
         """
@@ -99,7 +99,7 @@ class ForecastIO(object):
             float(latitude)
             float(longitude)
         except ValueError:
-            raise ValueError('Latitude and Longitude must be a float number')
+            raise ValueError('Latitude (%s) and Longitude (%s) must be a float number' % (latitude, longitude))
         url = self._forecast_io_url + self.forecast_io_api_key + '/'
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():
