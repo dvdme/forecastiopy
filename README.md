@@ -8,7 +8,17 @@ The API is fully implemented except for something I missed.
 Further development and improvements will continue.
 
 This is for and was developed with Python 2.7<br>
-I don't think this will work with Python 3<br>
+Worked also with Python 3<br>
+
+####What's new with 0.2
+
+* Indexes of auto created properties now start in 0, 0 being the current day [Issue #s](https://github.com/dvdme/forecastiopy/issues/2)
+
+* If the API key is invalid, an ValueError is raised [Issue #3](https://github.com/dvdme/forecastiopy/issues/3)
+
+* Better Python 3 support
+
+* Other improvements
 
 ####Quick Start:
 Install the package:
