@@ -74,7 +74,7 @@ class ForecastIO(object):
             else:
                 print('Latitude or longitude not set')
         else:
-            raise ValueError('The API Key doesn\'t seam to be valid.')
+            raise ValueError('The API Key doesn\'t seem to be valid.')
 
     def get_forecast(self, latitude, longitude):
         """
@@ -133,7 +133,7 @@ class ForecastIO(object):
 
     def http_get(self, request_url):
         """
-        This function recieves the request url and it is used internaly to get
+        This function recieves the request url and it is used internally to get
         the information via http.
         Returns the response content.
         Raises Timeout, TooManyRedirects, RequestException.
