@@ -1,6 +1,6 @@
 ForcastIO Python
 ===================
-A Python wrapper for the [Forecast.io](http://www.forecast.io) API.
+A Python wrapper for the [darksky.net](https://darksky.net) API (previously forecast.io).
 This started as port of my other wrapper [ForecastIO-Lib-Java](https://github.com/dvdme/forecastio-lib-java)
 but as the languages are so different, this one took its own way. 
 Anyway it is largely inspired by my previous Java wrapper.
@@ -9,6 +9,12 @@ Further development and improvements will continue.
 
 This is for and was developed with Python 2.7<br>
 Worked also with Python 3<br>
+
+####What's new with 0.21
+
+* Changed api url from old api.forecast.io to the new api.darksky.net
+
+* Some docstrings typos fixed
 
 ####What's new with 0.2
 
@@ -43,7 +49,7 @@ Precipitation Probability: 0.29
 ```
 
 ####What is does:
-* It can read Data Points and Data blocks from the [Forecast.io](http://www.forecast.io) API.
+* It can read Data Points and Data blocks from the [darksky.net](https://darksky.net) API.
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
 * It reads all available fields.
 * It reads all the available flags.
@@ -66,7 +72,7 @@ contain the currently, minutely, hourly, daily, flags and alerts reports.
 Data can be accessed by the returned dictionary or directly by attributes made with reflection magic.
 See "Usage Examples" below.
 
-Please refer to the API docs [https://developer.forecast.io](https://developer.forecast.io) 
+Please refer to the API docs [https://darksky.net/dev/](https://darksky.net/dev/) 
 for better understanding of the data and for the API key. - You'll need a key to get it to work.
 
 ####Dependencies: 
@@ -229,3 +235,7 @@ And I like Python.
 License
 -------
 The code is available under the terms of the [Eclipse Public License](http://www.eclipse.org/legal/epl-v10.html).
+
+
+[Powered by Dark Sky](https://darksky.net/poweredby/)
+
