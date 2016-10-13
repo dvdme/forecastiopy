@@ -239,3 +239,6 @@ The code is available under the terms of the [Eclipse Public License](http://www
 
 [Powered by Dark Sky](https://darksky.net/poweredby/)
 
+[![Python Powered](https://www.python.org/static/community_logos/python-powered-w-200x80.png](https://www.python.org/)
+
+
