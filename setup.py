@@ -15,4 +15,5 @@ setup(name='forecastiopy',
       install_requires=[
           'requests',
       ],
-      zip_safe=True)
+      zip_safe=True,
+      test_suite="tests")

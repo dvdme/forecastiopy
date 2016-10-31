@@ -8,7 +8,12 @@ class TestForecastIO(unittest.TestCase):
         with open('tests/resources/apikey.txt') as f:
             apikey = f.read()
             fio = ForecastIO.ForecastIO(apikey)
-            self.assertRaises(TypeError, lambda: fio.get_url(), msg='Did not raised ValueError on invalid lat and/or lon')
+            with self.assertRaises(TypeError):
+                fio.get_url()
+
+    def test_invalid_apikey(self):
+        with self.assertRaises(ValueError):
+            fio = ForecastIO.ForecastIO('123')
 
 if __name__ == '__main__':
     unittest.main()
