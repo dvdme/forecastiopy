@@ -1,4 +1,5 @@
-import env
+import os
+import sys
 import unittest
 from forecastiopy import *
 
@@ -16,4 +17,12 @@ class TestForecastIO(unittest.TestCase):
             fio = ForecastIO.ForecastIO('123')
 
 if __name__ == '__main__':
+    # append module root directory to sys.path
+    sys.path.append(
+        os.path.dirname(
+            os.path.dirname(
+                os.path.abspath(__file__)
+            )
+        )
+    )
     unittest.main()
