@@ -5,7 +5,7 @@ from forecastiopy import *
 class TestForecastIO(unittest.TestCase):
 
     def test_get_url(self):
-        with open('tests/resources/apikey.txt') as f:
+        with open('tests/resources/dummy_apikey.txt') as f:
             apikey = f.read()
             fio = ForecastIO.ForecastIO(apikey)
             with self.assertRaises(TypeError):
