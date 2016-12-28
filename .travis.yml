@@ -5,4 +5,4 @@ cache: pip
 install:
   - python setup.py develop
 script:
-  - setup.py test
+  - python setup.py test
