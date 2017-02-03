@@ -60,21 +60,29 @@ class ForecastIO(object):
         reply.
         """
 
-        if len(apikey) == 32:
-            self.forecast_io_api_key = apikey
-            self.extend_url = extend
-            self.exclude_url = exclude
-            self.units_url = units
-            self.lang_url = lang
-            self.time_url = time
-            self.latitude = latitude
-            self.longitude = longitude
-            if latitude is not None and longitude is not None:
-                self.get_forecast(latitude, longitude)
-            else:
-                print('Latitude or longitude not set')
-        else:
+        if len(apikey) != 32:
             raise ValueError('The API Key doesn\'t seem to be valid.')
+
+        if latitude is None or longitude is None:
+            print('Latitude or longitude not set')
+
+        self.forecast = {}
+        self.alerts = None
+        self.currently = None
+        self.daily = None
+        self.flags = None
+        self.hourly = None
+        self.minutely = None
+
+        self.forecast_io_api_key = apikey
+        self.extend_url = extend
+        self.exclude_url = exclude
+        self.units_url = units
+        self.lang_url = lang
+        self.time_url = time
+        self.latitude = latitude
+        self.longitude = longitude
+        self.get_forecast(latitude, longitude)
 
     def get_forecast(self, latitude, longitude):
         """
@@ -188,10 +196,7 @@ class ForecastIO(object):
         """
         Returns currently information or None if it is not available.
         """
-        if self.has_currently() == True:
-            return self.currently
-        else:
-            return None
+        return self.currently
 
     def has_daily(self):
         """
@@ -203,10 +208,7 @@ class ForecastIO(object):
         """
         Returns daily information or None if it is not available.
         """
-        if self.has_daily() == True:
-            return self.daily
-        else:
-            return None
+        return self.daily
 
     def has_hourly(self):
         """
@@ -218,10 +220,7 @@ class ForecastIO(object):
         """
         Returns hourly information or None if it is not available.
         """
-        if self.has_hourly() == True:
-            return self.hourly
-        else:
-            return None
+        return self.hourly
 
     def has_minutely(self):
         """
@@ -233,10 +232,7 @@ class ForecastIO(object):
         """
         Returns minutely information or None if it is not available.
         """
-        if self.has_minutely() == True:
-            return self.minutely
-        else:
-            return None
+        return self.minutely
 
     def has_flags(self):
         """
@@ -248,10 +244,7 @@ class ForecastIO(object):
         """
         Returns flags information or None if it is not available.
         """
-        if self.has_flags() == True:
-            return self.flags
-        else:
-            return None
+        return self.flags
 
     def has_alerts(self):
         """
@@ -263,7 +256,4 @@ class ForecastIO(object):
         """
         Returns alerts information or None if it is not available.
         """
-        if self.has_alerts() == True:
-            return self.alerts
-        else:
-            return None
+        return self.alerts
