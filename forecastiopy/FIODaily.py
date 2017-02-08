@@ -21,7 +21,7 @@ class FIODaily(object):
             self.daily = forecast_io.get_daily()
             for item in forecast_io.get_daily().keys():
                 setattr(self, item, forecast_io.get_daily()[item])
-            for day in xrange(0, self.days()):
+            for day in range(0, self.days()):
                 for item in self.get_day(day).keys():
                     setattr(self, 'day_'+str(day)+'_'+item, \
                     self.get_day(day)[item])

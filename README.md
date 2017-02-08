@@ -243,9 +243,11 @@ License
 -------
 The code is available under the terms of the [Eclipse Public License](http://www.eclipse.org/legal/epl-v10.html).
 
+Acknowledgements
+---------------
 
-[Powered by Dark Sky](https://darksky.net/poweredby/)
+[![Python Powered](https://www.python.org/static/community_logos/python-powered-w-200x80.png)](https://www.python.org/)
 
-[![Python Powered](https://www.python.org/static/community_logos/python-powered-w-200x80.png](https://www.python.org/)]
+[![Powered by Dark Sky](https://darksky.net/dev/img/attribution/poweredby.png)](https://darksky.net/poweredby/)
 
 
