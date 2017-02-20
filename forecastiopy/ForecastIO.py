@@ -63,9 +63,6 @@ class ForecastIO(object):
         if len(apikey) != 32:
             raise ValueError('The API Key doesn\'t seem to be valid.')
 
-        if latitude is None or longitude is None:
-            print('Latitude or longitude not set')
-
         self.forecast = {}
         self.alerts = None
         self.currently = None
@@ -82,7 +79,10 @@ class ForecastIO(object):
         self.time_url = time
         self.latitude = latitude
         self.longitude = longitude
-        self.get_forecast(latitude, longitude)
+        if latitude is None or longitude is None:
+            print('Latitude or longitude not set. Not getting forecast.')
+        else:
+            self.get_forecast(latitude, longitude)
 
     def get_forecast(self, latitude, longitude):
         """
