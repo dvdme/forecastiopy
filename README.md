@@ -10,13 +10,13 @@ Further development and improvements will continue.
 This is for and was developed with Python 2.7<br>
 Worked also with Python 3<br>
 
-####What's new with 0.21
+#### What's new with 0.21
 
 * Changed api url from old api.forecast.io to the new api.darksky.net
 
 * Some docstrings typos fixed
 
-####What's new with 0.2
+#### What's new with 0.2
 
 * Indexes of auto created properties now start in 0, 0 being the current day [Issue #s](https://github.com/dvdme/forecastiopy/issues/2)
 
@@ -26,7 +26,7 @@ Worked also with Python 3<br>
 
 * Other improvements
 
-####Quick Start:
+#### Quick Start:
 Install the package:
 ```
 pip install forecastiopy
@@ -48,7 +48,7 @@ Temperature: 11.07
 Precipitation Probability: 0.29
 ```
 
-####What is does:
+#### What is does:
 * It can read Data Points and Data blocks from the [darksky.net](https://darksky.net) API.
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
 * It reads all available fields.
@@ -56,15 +56,15 @@ Precipitation Probability: 0.29
 * It reads all the available alerts. 
 * It reads all the available errors. 
 
-####What it does not:
+#### What it does not:
 * It does not implements the `callback` request option.
 
-####To Do:
+#### To Do:
 * I'm not sure at this point in time but I'm sure something will appear.
 * I need to improve the docstrings
 * Python 3 compatibility
 
-####How it works:
+#### How it works:
 The `forecastiopy` package has 9 classes.
 The main class is `ForecastIO`: It handles the connection, build the url and the gets the initial data from the API.
 The classes `FIOCurrently`, `FIOMinutely`, `FIOHourly`, `FIODaily`, `FIOFlags` and `FIOAlerts` 
@@ -75,7 +75,7 @@ See "Usage Examples" below.
 Please refer to the API docs [https://darksky.net/dev/](https://darksky.net/dev/) 
 for better understanding of the data and for the API key. - You'll need a key to get it to work.
 
-####Dependencies: 
+#### Dependencies: 
 * [requests](https://pypi.python.org/pypi/requests/)
 
 

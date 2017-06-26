@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 setup(name='forecastiopy',
-      version='0.21',
+      version='0.22',
       description='A wrapper to access weather data provided by darksky.net',
       url='http://github.com/dvdme/forecastiopy',
       download_url='http://github.com/dvdme/forecastiopy/tarball/0.2',
