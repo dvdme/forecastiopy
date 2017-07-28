@@ -6,11 +6,15 @@ It then gets the weather data based on those configurations.
 The resulting object is used by the other classes to get the information.
 """
 
-from __future__ import print_function
 import sys
 import json
 import requests
+import logging
 
+
+log = logging.getLogger(__name__)
+log.setLevel(level=logging.WARNING)
+log.addHandler(logging.NullHandler())
 
 
 class ForecastIO(object):
@@ -72,7 +76,7 @@ class ForecastIO(object):
             if latitude is not None and longitude is not None:
                 self.get_forecast(latitude, longitude)
             else:
-                print('Latitude or longitude not set')
+                log.warning('Latitude or longitude not set')
         else:
             raise ValueError('The API Key doesn\'t seem to be valid.')
 
@@ -144,32 +148,32 @@ class ForecastIO(object):
             headers = {'Accept-Encoding': 'gzip, deflate'}
             response = requests.get(request_url, headers=headers)
         except requests.exceptions.Timeout as ext:
-            print('Error: Timeout', ext)
+            log.error('Error: Timeout', ext)
         except requests.exceptions.TooManyRedirects as extmr:
-            print('Error: TooManyRedirects', extmr)
+            log.error('Error: TooManyRedirects', extmr)
         except requests.exceptions.RequestException as ex:
-            print('Error: RequestException', ex)
+            log.error('Error: RequestException', ex)
             sys.exit(1)
 
         try:
             self.cache_control = response.headers['Cache-Control']
         except KeyError as kerr:
-            print('Warning: Could not get headers. %s' % kerr)
+            log.warning('Warning: Could not get headers. %s' % kerr)
             self.cache_control = None
         try:
             self.expires = response.headers['Expires']
         except KeyError as kerr:
-            print('Warning: Could not get headers. %s' % kerr)
+            log.warning('Warning: Could not get headers. %s' % kerr)
             self.extend_url = None
         try:
             self.x_forecast_api_calls = response.headers['X-Forecast-API-Calls']
         except KeyError as kerr:
-            print('Warning: Could not get headers. %s' % kerr)
+            log.warning('Warning: Could not get headers. %s' % kerr)
             self.x_forecast_api_calls = None
         try:
             self.x_responde_time = response.headers['X-Response-Time']
         except KeyError as kerr:
-            print('Warning: Could not get headers. %s' % kerr)
+            log.warning('Warning: Could not get headers. %s' % kerr)
             self.x_responde_time = None
 
         if response.status_code is not 200:
