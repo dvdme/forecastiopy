@@ -21,8 +21,8 @@ log.warning("A warning")
 log.info("ForecastIO default")
 ForecastIO.ForecastIO("0" * 32)
 
-# Disables the ForecastIO logger
-logging.getLogger("forecastiopy.ForecastIO").disabled = True
+# Disables the forecastiopy logger
+logging.getLogger("forecastiopy").disabled = True
 
 # Will no longer print a warning message
 log.info("ForecastIO logger disabled")

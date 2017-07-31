@@ -11,10 +11,7 @@ import json
 import requests
 import logging
 
-
-log = logging.getLogger(__name__)
-log.setLevel(level=logging.WARNING)
-log.addHandler(logging.NullHandler())
+log = logging.getLogger("forecastiopy")
 
 
 class ForecastIO(object):
