@@ -116,16 +116,22 @@ class ForecastIO(object):
         url += '&lang=' + self.lang_url.strip()
         if self.exclude_url is not None:
             excludes = ''
-            for item in self.exclude_url:
-                if item in self._allowed_excludes_extends:
-                    excludes += item + ','
+            if self.exclude_url in self._allowed_excludes_extends:
+                excludes += self.exclude_url + ','
+            else:
+                for item in self.exclude_url:
+                    if item in self._allowed_excludes_extends:
+                        excludes += item + ','
             if len(excludes) > 0:
                 url += '&exclude=' + excludes.rstrip(',')
         if self.extend_url is not None:
             extends = ''
-            for item in self.extend_url:
-                if item in self._allowed_excludes_extends:
-                    extends += item + ','
+            if self.extend_url in self._allowed_excludes_extends:
+                extends += self.extend_url + ','
+            else:
+                for item in self.extend_url:
+                    if item in self._allowed_excludes_extends:
+                        extends += item + ','
             if len(extends) > 0:
                 url += '&extend=' + extends.rstrip(',')
         return url
