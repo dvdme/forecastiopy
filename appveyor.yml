@@ -1,0 +1,6 @@
+version: '{build}'
+os: Windows Server 2012
+build_script:
+  - python setup.py develop
+test_script:
+  - python setup.py test

@@ -107,8 +107,8 @@ class ForecastIO(object):
         try:
             float(latitude)
             float(longitude)
-        except ValueError:
-            raise ValueError('Latitude (%s) and Longitude (%s) must be a float number' % (latitude, longitude))
+        except TypeError:
+            raise TypeError('Latitude (%s) and Longitude (%s) must be a float number' % (latitude, longitude))
         url = self._darksky_url + self.forecast_io_api_key + '/'
         url += str(latitude).strip() + ',' + str(longitude).strip()
         if self.time_url and not self.time_url.isspace():

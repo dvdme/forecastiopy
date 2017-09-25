@@ -60,3 +60,5 @@ target/
 
 # pycharm
 .idea/
+
+tests/resources/apikey.txt
