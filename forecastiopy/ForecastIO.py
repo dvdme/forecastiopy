@@ -87,11 +87,22 @@ class ForecastIO(object):
 
     def get_forecast(self, latitude, longitude):
         """
-        Gets the weather data and stores it in the respective dictionaries if
-        available.
+        Gets the weather data from darksky api and stores it in 
+        the respective dictionaries if available.
         This function should be used to fetch weather information.
         """
         reply = self.http_get(self.url_builder(latitude, longitude))
+        self.forecast = json.loads(reply)
+
+        for item in self.forecast.keys():
+            setattr(self, item, self.forecast[item])
+
+    def get_forecast_fromstr(self, reply):
+        """
+        Gets the weather data from a darksky api response string
+        and stores it in the respective dictionaries if available.
+        This function should be used to fetch weather information.
+        """
         self.forecast = json.loads(reply)
 
         for item in self.forecast.keys():
