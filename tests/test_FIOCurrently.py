@@ -23,6 +23,24 @@ class TestFIOCurrently(unittest.TestCase):
     def test_get_time(self):
         self.assertEqual(self.cur.time, self.response['time'])
 
+    def test_get_summary(self):
+        self.assertEqual(self.cur.summary, self.response['summary'])
+
+    def test_get_icon(self):
+        self.assertEqual(self.cur.icon, self.response['icon'])
+
+    def test_get_precipIntensity(self):
+        self.assertEqual(self.cur.precipIntensity, self.response['precipIntensity'])
+
+    def test_get_precipProbability(self):
+        self.assertEqual(self.cur.precipProbability, self.response['precipProbability'])
+
+    def test_get_temperature(self):
+        self.assertEqual(self.cur.temperature, self.response['temperature'])
+
+    def test_get_apparentTemperature(self):
+        self.assertEqual(self.cur.apparentTemperature, self.response['apparentTemperature'])
+
 if __name__ == '__main__':
     # append module root directory to sys.path
     sys.path.append(
