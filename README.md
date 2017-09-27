@@ -13,8 +13,16 @@ Anyway it is largely inspired by my previous Java wrapper.
 The API is fully implemented except for something I missed.
 Further development and improvements will continue.
 
-This is for and was developed with Python 2.7<br>
-Worked also with Python 3<br>
+Tested with the following Python version:
+- 2.7
+- 3.5
+- 3.6
+- 3.7-dev
+
+#### What's new with 0.3
+
+* Logging support.
+
 
 #### What's new with 0.21
 
@@ -39,12 +47,12 @@ pip install forecastiopy
 ```
 
 Get the coordinates of your location, let's say Lisbon:
-```
+```python
 >>> Lisbon = [38.7252993, -9.1500364]
 ```
 
 Get the current temperature and precipitation probability:
-```
+```python
 >>> from forecastiopy import *
 >>> fio = ForecastIO.ForecastIO(YOUR_APY_KEY, latitude=Lisbon[0], longitude=Lisbon[1])
 >>> current = FIOCurrently.FIOCurrently(fio)
@@ -55,6 +63,7 @@ Precipitation Probability: 0.29
 ```
 
 #### What is does:
+
 * It can read Data Points and Data blocks from the [darksky.net](https://darksky.net) API.
   * This means it can read Currently, Minutely, Hourly, Daily, Flags and Alerts data.
 * It reads all available fields.
@@ -63,14 +72,16 @@ Precipitation Probability: 0.29
 * It reads all the available errors. 
 
 #### What it does not:
+
 * It does not implements the `callback` request option.
 
 #### To Do:
+
 * I'm not sure at this point in time but I'm sure something will appear.
 * I need to improve the docstrings
-* Python 3 compatibility
 
 #### How it works:
+
 The `forecastiopy` package has 9 classes.
 The main class is `ForecastIO`: It handles the connection, build the url and the gets the initial data from the API.
 The classes `FIOCurrently`, `FIOMinutely`, `FIOHourly`, `FIODaily`, `FIOFlags` and `FIOAlerts` 
@@ -82,6 +93,7 @@ Please refer to the API docs [https://darksky.net/dev/](https://darksky.net/dev/
 for better understanding of the data and for the API key. - You'll need a key to get it to work.
 
 #### Dependencies: 
+
 * [requests](https://pypi.python.org/pypi/requests/)
 
 
@@ -131,7 +143,7 @@ if fio.has_minutely() is True:
 	print 'Summary:', minutely.summary
 	print 'Icon:', minutely.icon
 	print
-	for minute in xrange(0, minutely.minutes()):
+	for minute in range(0, minutely.minutes()):
 		print 'Minute', minute+1
 		for item in minutely.get_minute(minute).keys():
 			print item + ' : ' + unicode(minutely.get_minute(minute)[item])
@@ -153,7 +165,7 @@ if fio.has_hourly() is True:
 	print 'Summary:', hourly.summary
 	print 'Icon:', hourly.icon
 	print
-	for hour in xrange(0, hourly.hours()):
+	for hour in range(0, hourly.hours()):
 		print 'Hour', hour+1
 		for item in hourly.get_hour(hour).keys():
 			print item + ' : ' + unicode(hourly.get_hour(hour)[item])
@@ -175,7 +187,7 @@ if fio.has_daily() is True:
 	print 'Summary:', daily.summary
 	print 'Icon:', daily.icon
 	print
-	for day in xrange(0, daily.days()):
+	for day in range(0, daily.days()):
 		print 'Day', day+1
 		for item in daily.get_day(day).keys():
 			print item + ' : ' + unicode(daily.get_day(day)[item])
@@ -242,11 +254,18 @@ License
 -------
 The code is available under the terms of the [Eclipse Public License](http://www.eclipse.org/legal/epl-v10.html).
 
+Contributors
+------------
+* Thanks to everyone that [contribuited](https://github.com/dvdme/forecastiopy/graphs/contributors) to make this software better.
+
 Acknowledgements
 ---------------
+
 
 [![Python Powered](https://www.python.org/static/community_logos/python-powered-w-200x80.png)](https://www.python.org/)
 
 [![Powered by Dark Sky](https://darksky.net/dev/img/attribution/poweredby.png)](https://darksky.net/poweredby/)
 
+[![Jet Brains IntelliJ IDEA](/art/jetbrains-variant-3.png)](http://www.jetbrains.com/idea/)
 
+Thanks to [JetBrains](https://www.jetbrains.com/) for providing an open source license for.
