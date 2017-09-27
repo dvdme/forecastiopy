@@ -143,7 +143,7 @@ if fio.has_minutely() is True:
 	print 'Summary:', minutely.summary
 	print 'Icon:', minutely.icon
 	print
-	for minute in xrange(0, minutely.minutes()):
+	for minute in range(0, minutely.minutes()):
 		print 'Minute', minute+1
 		for item in minutely.get_minute(minute).keys():
 			print item + ' : ' + unicode(minutely.get_minute(minute)[item])
@@ -165,7 +165,7 @@ if fio.has_hourly() is True:
 	print 'Summary:', hourly.summary
 	print 'Icon:', hourly.icon
 	print
-	for hour in xrange(0, hourly.hours()):
+	for hour in range(0, hourly.hours()):
 		print 'Hour', hour+1
 		for item in hourly.get_hour(hour).keys():
 			print item + ' : ' + unicode(hourly.get_hour(hour)[item])
@@ -187,7 +187,7 @@ if fio.has_daily() is True:
 	print 'Summary:', daily.summary
 	print 'Icon:', daily.icon
 	print
-	for day in xrange(0, daily.days()):
+	for day in range(0, daily.days()):
 		print 'Day', day+1
 		for item in daily.get_day(day).keys():
 			print item + ' : ' + unicode(daily.get_day(day)[item])
