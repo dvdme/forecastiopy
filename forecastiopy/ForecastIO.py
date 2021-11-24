@@ -208,7 +208,7 @@ class ForecastIO(object):
         """
         Return True if currently information is available. False otherwise.
         """
-        return 'currently' in self.forecast
+        return ('currently' in self.forecast) and (self.forecast['currently'] is not None)
 
     def get_currently(self):
         """
@@ -220,7 +220,7 @@ class ForecastIO(object):
         """
         Return True if daily information is available. False otherwise.
         """
-        return 'daily' in self.forecast
+        return ('daily' in self.forecast) and (self.forecast['daily'] is not None)
 
     def get_daily(self):
         """
@@ -232,7 +232,7 @@ class ForecastIO(object):
         """
         Return True if hourly information is available. False otherwise.
         """
-        return 'hourly' in self.forecast
+        return ('hourly' in self.forecast) and (self.forecast['hourly'] is not None)
 
     def get_hourly(self):
         """
@@ -244,7 +244,7 @@ class ForecastIO(object):
         """
         Return True if minutly information is available. False otherwise.
         """
-        return 'minutely' in self.forecast
+        return ('minutely' in self.forecast) and (self.forecast['minutely'] is not None)
 
     def get_minutely(self):
         """
@@ -256,7 +256,7 @@ class ForecastIO(object):
         """
         Return True if flags information is available. False otherwise.
         """
-        return 'flags' in self.forecast
+        return ('flags' in self.forecast) and (self.forecast['flags'] is not None)
 
     def get_flags(self):
         """
@@ -268,7 +268,7 @@ class ForecastIO(object):
         """
         Return True if alerts information is available. False otherwise.
         """
-        return 'alerts' in self.forecast
+        return 'alerts' in self.forecast and (self.forecast['alerts'] is not None)
 
     def get_alerts(self):
         """
