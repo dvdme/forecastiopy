@@ -1,6 +1,6 @@
 version: '{build}'
 os: Windows Server 2019
-build: Script
+build: off
 build_script:
   - python setup.py develop
 test_script:
