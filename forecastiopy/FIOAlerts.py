@@ -10,6 +10,7 @@ class FIOAlerts(object):
     This class recieves an ForecastIO object and holds the alerts weather
     conditions. It has one class for this purpose.
     """
+
     alerts = None
 
     def __init__(self, forecast_io):
@@ -41,7 +42,7 @@ class FIOAlerts(object):
         if alert > self.alerts_count() or self.alerts_count() is None:
             return None
         else:
-            return self.get()[alert-1]
+            return self.get()[alert - 1]
 
     def alerts_count(self):
         """

@@ -4,6 +4,7 @@ This module recieves an ForecastIO object and holds the daily weather
 conditions. It has one class for this purpose.
 """
 
+
 class FIODaily(object):
     """
     This class recieves an ForecastIO object and holds the daily weather
@@ -23,8 +24,9 @@ class FIODaily(object):
                 setattr(self, item, forecast_io.get_daily()[item])
             for day in range(0, self.days()):
                 for item in self.get_day(day).keys():
-                    setattr(self, 'day_'+str(day)+'_'+item, \
-                    self.get_day(day)[item])
+                    setattr(
+                        self, "day_" + str(day) + "_" + item, self.get_day(day)[item]
+                    )
 
     def get(self, day=None):
         """
@@ -47,10 +49,10 @@ class FIODaily(object):
         if day > self.days():
             return None
         else:
-            return self.get()['data'][day]
+            return self.get()["data"][day]
 
     def days(self):
         """
         Returns how many days of prediction are available
         """
-        return len(self.get()['data'])
+        return len(self.get()["data"])

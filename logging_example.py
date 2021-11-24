@@ -17,7 +17,7 @@ log.debug("A debug message")
 log.info("An info message")
 log.warning("A warning")
 
-# Will print a warning message
+# Will print an info message
 log.info("ForecastIO default")
 ForecastIO.ForecastIO("0" * 32)
 

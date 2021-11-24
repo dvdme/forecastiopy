@@ -24,8 +24,11 @@ class FIOHourly(object):
                 setattr(self, item, forecast_io.get_hourly()[item])
             for hour in range(0, self.hours()):
                 for item in self.get_hour(hour).keys():
-                    setattr(self, 'hour_'+str(hour)+'_'+item, \
-                    self.get_hour(hour)[item])
+                    setattr(
+                        self,
+                        "hour_" + str(hour) + "_" + item,
+                        self.get_hour(hour)[item],
+                    )
 
     def get(self, hour=None):
         """
@@ -48,10 +51,10 @@ class FIOHourly(object):
         if hour > self.hours():
             return None
         else:
-            return self.get()['data'][hour]
+            return self.get()["data"][hour]
 
     def hours(self):
         """
         Returns how many hours of prediction are available
         """
-        return len(self.get()['data'])
+        return len(self.get()["data"])

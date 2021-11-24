@@ -4,6 +4,7 @@ This module recieves an ForecastIO object and holds the minutely weather
 conditions. It has one class for this purpose.
 """
 
+
 class FIOMinutely(object):
     """
     This class recieves an ForecastIO object and holds the minutely weather
@@ -23,8 +24,11 @@ class FIOMinutely(object):
                 setattr(self, item, forecast_io.get_minutely()[item])
             for minute in range(0, self.minutes()):
                 for item in self.get_minute(minute).keys():
-                    setattr(self, 'minute_'+str(minute)+'_'+item, \
-                    self.get_minute(minute)[item])
+                    setattr(
+                        self,
+                        "minute_" + str(minute) + "_" + item,
+                        self.get_minute(minute)[item],
+                    )
 
     def get(self, minute=None):
         """
@@ -47,10 +51,10 @@ class FIOMinutely(object):
         if minute > self.minutes():
             return None
         else:
-            return self.get()['data'][minute]
+            return self.get()["data"][minute]
 
     def minutes(self):
         """
         Returns how many minutes of prediction are available
         """
-        return len(self.get()['data'])
+        return len(self.get()["data"])
