@@ -1,7 +1,7 @@
 | Branch        | Travis CI     |
 | ------------- |:-------------:|
-| master        |[![Build Status](https://travis-ci.org/dvdme/forecastiopy.svg?branch=master)](https://travis-ci.org/dvdme/forecastio-lib-java)|
-| dev           |[![Build Status](https://travis-ci.org/dvdme/forecastiopy.svg?branch=dev)](https://travis-ci.org/dvdme/forecastio-lib-java)|
+| master        |[![Build Status](https://travis-ci.org/dvdme/forecastiopy.svg?branch=master)](https://travis-ci.org/github/dvdme/forecastiopy)|
+| dev           |[![Build Status](https://travis-ci.org/dvdme/forecastiopy.svg?branch=dev)](https://travis-ci.org/github/dvdme/forecastiopy)|
 
 ForcastIO Python
 ===================
