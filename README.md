@@ -1,3 +1,10 @@
+# Last update
+
+[The ForecastIO / DarkSky API is no longer available.](https://darksky.net/dev)
+
+This repository has not been updated for a long time but since it is from the times I was starting my career and more people used this, it will reamin archived here.
+
+
 | Branch        | Travis CI     |
 | ------------- |:-------------:|
 | master        |[![Build Status](https://travis-ci.org/dvdme/forecastiopy.svg?branch=master)](https://travis-ci.org/github/dvdme/forecastiopy)|
